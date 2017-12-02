@@ -98,6 +98,24 @@ main{
 	text-align: center;
 }
 
+#suspect_file_container{
+	position: absolute;
+	display: none;
+	right: 1450px;
+	bottom: 530px;
+}
+
+#case_file_map{
+	height: 60px;
+}
+
+#case_file_text{
+	text-align: center;
+	font-weight: bold;
+	font-size: 19px;
+	color: white;
+}
+
 #image_container_1{
 	position: absolute;
 	display: none;

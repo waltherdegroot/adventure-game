@@ -12,6 +12,7 @@ var ev_image_3 = document.getElementById("image_3");
 var img_container_1 = document.getElementById("image_container_1");
 var img_container_2 = document.getElementById("image_container_2");
 var img_container_3 = document.getElementById("image_container_3");
+var file_container_1 = document.getElementById("suspect_file_container");
 var user = "";
 var doughnuts = false;
 
@@ -29,6 +30,10 @@ var ev_7 = false;
 var witness_1_ev_1 = false;
 var witness_2_ev_1 = false;
 var witness_3_ev_1 = false;
+
+/*=========Suspects===========*/
+
+var suspect_name = ["Walther","Emily","Irshaad"];
 
 start_btn.onclick = setUsername;
 
@@ -56,6 +61,7 @@ function setUsername(){
 		document.getElementById("police_badge").style.display = "inline";
 		story.style.display = "inline";
 		story.innerHTML = "You arrived at your station. you sat down for a bit and drank your coffee, when suddenly you got called to a Crime Scene";
+		file_container_1.style.display = "inline";
 	}
 	else{
 		document.getElementById("usernameTextBox").style.backgroundColor = "#fc949a";
@@ -71,6 +77,7 @@ function crimeScene(){
 	document.getElementById("task_bar").style.display = "none";
 	document.getElementById("police_badge").style.display = "none";
 	document.getElementById("password_post_it").style.display = "none";
+	file_container_1.style.display = "none";
 	head_1.innerHTML = "Crime Scene"
 	story.innerHTML = "You arrived at the crime scene. It is a murder crime scene. A high ranking officer was killed.";
 	option_1.innerHTML = "Talk with witnesses"
@@ -86,10 +93,12 @@ function crimeScene(){
 	option_4.onclick = goToStation;
 }
 
+/*=========witness's===========*/
+
 function talkWitness(){
-	console.log("you talked to the witnesses");
+	console.log("Detective " + user +  "talked to the witnesses");
 	body.style.backgroundImage = 'url("./images/witness_scene.jpg")';
-	story.innerHTML = "You starting asking qeustions";
+	story.innerHTML = "You are starting to ask qeustions";
 	option_1.innerHTML = "Go back to the crime scene";
 	option_1.onclick = crimeScene;
 	option_2.innerHTML = "Talk to first witness";
@@ -100,20 +109,87 @@ function talkWitness(){
 	option_4.onclick = talkWitness_3;
 }
 
+/*=========witness 1===========*/
+
 function talkWitness_1(){
-	alert("Witness heard a gunshot and went towards the gunshot");
+	option_1.innerHTML = "Thanks for your time";
+	option_1.onclick = talkWitness;
+	option_2.innerHTML = "Have you seen or heard anything?";
+	option_2.onclick = talkWitness_1_1;
+	option_3.innerHTML = "";
+	option_3.onclick = talkWitness_1_2;
+	option_4.innerHTML = "";
+	option_4.onclick = talkWitness_1_3; 
 }
+
+function talkWitness_1_1(){
+
+}
+
+function talkWitness_1_2(){
+	
+}
+
+function talkWitness_1_3(){
+	
+}
+
+/*=========witness 2===========*/
 
 function talkWitness_2(){
 	alert("Witness saw and heard nothing");
+	option_1.innerHTML = "Thanks for your time";
+	option_1.onclick = talkWitness;
+	option_2.innerHTML = "";
+	option_2.onclick = talkWitness_2_1;
+	option_3.innerHTML = "";
+	option_3.onclick = talkWitness_2_2;
+	option_4.innerHTML = "";
+	option_4.onclick = talkWitness_2_3;
 }
+
+function talkWitness_2_1(){
+
+}
+
+function talkWitness_2_2(){
+	
+}
+
+function talkWitness_2_3(){
+	
+}
+
+/*=========witness 3===========*/
 
 function talkWitness_3(){
 	alert("Witness saw a car speeding away");
+	option_1.innerHTML = "Thanks for your time";
+	option_1.onclick = talkWitness;
+	option_2.innerHTML = "";
+	option_2.onclick = talkWitness_3_1;
+	option_3.innerHTML = "";
+	option_3.onclick = talkWitness_3_2;
+	option_4.innerHTML = "";
+	option_4.onclick = talkWitness_3_3;
 }
 
+function talkWitness_3_1(){
+
+}
+
+function talkWitness_3_2(){
+	
+}
+
+function talkWitness_3_3(){
+	
+}
+
+/*=========Search CrimeScene===========*/
+
 function searchClue(){
-	console.log("you searched for a clue");
+	console.log("Detective " + user + " started searching for a clue");
 	option_1.innerHTML = "Go back to the crime scene";
 	option_1.onclick = crimeScene;
 	body.style.backgroundImage = 'url("./images/search_place.jpg")';
@@ -127,81 +203,205 @@ function searchClue(){
 }
 
 function searchClue_opt_2(){
-	alert("you are starting your search in the bedrooms and the bathroom");
+	body.style.backgroundImage = 'url("./images/search_place.jpg")';
+	body.style.backgroundSize = "100%";
+	body.style.backgroundPosition = "center";
 	option_1.innerHTML = "Go back to the map";
 	option_1.onclick = searchClue;
 	option_2.innerHTML = "Search bedroom 2";
+	option_2.style.display = "inline";
 	option_2.onclick = searchClue_opt_2_1;
 	option_3.innerHTML = "Search bedroom 3";
+	option_3.style.display = "inline";
 	option_3.onclick = searchClue_opt_2_2;
 	option_4.innerHTML = "Search bathroom";
+	option_4.style.display = "inline";
 	option_4.onclick = searchClue_opt_2_3;
+	img_container_1.style.display = "none";
 }
 
 function searchClue_opt_2_1(){
-	console.log("you searched bedroom 2");
+	console.log("Detective " + user + " searched bedroom 2");
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_2;
 	body.style.backgroundImage = 'url("./images/bedroom_1_cs.jpg")';
 	option_2.style.display = "none";
 	option_3.style.display = "none";
 	option_4.style.display = "none";
-	ev_image_1.src = "./images/evidence_1.jpg";
-	img_container_1.style.display = "block";
-	ev_image_1.onclick = foundEvidence_1;
+	if(!ev_1){
+		ev_image_1.src = "./images/evidence_1.jpg";
+		ev_image_1.style.width = "35px";
+		img_container_1.style.display = "block";
+		img_container_1.style.top = "360px";
+		img_container_1.style.left = "1390px"; 
+		ev_image_1.onclick = foundEvidence_1;
+	} 
 }
 
 function foundEvidence_1(){
-	alert("you found a shell casing");
+	alert("Detective " + user + " found a shell casing");
+	ev_1 = true;
+	img_container_1.style.display = "none";
 }
 
 function searchClue_opt_2_2(){
-	console.log("you searched bedroom 3");
+	console.log("Detective " + user + " searched bedroom 3");
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_2;
 	body.style.backgroundImage = 'url("./images/bedroom_2_cs.jpg")';
 	option_2.style.display = "none";
 	option_3.style.display = "none";
 	option_4.style.display = "none";
+	ev_image_1.src = "./images/shoe-print.png";
+	ev_image_1.style.width = "73px";
+	img_container_1.style.display = "block";
+	img_container_1.style.top = "762px";
+	img_container_1.style.left = "697px";
+	ev_image_1.onclick = foundEvidence_2;
+}
+
+function foundEvidence_2(){
+	alert("Detective " + user + " found a shoe print");
+	ev_2 = true;
 }
 
 function searchClue_opt_2_3(){
-	console.log("you searched bathroom");
+	console.log("Detective " + user + " searched bathroom");
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_2;
 	body.style.backgroundImage = 'url("./images/bathroom_1_cs.jpg")';
 	option_2.style.display = "none";
 	option_3.style.display = "none";
 	option_4.style.display = "none";	
+	ev_image_1.src = "./images/bloody_knife.png";
+	ev_image_1.style.width = "148px";
+	img_container_1.style.display = "block";
+	img_container_1.style.top = "665px";
+	img_container_1.style.left = "12px";
+	ev_image_1.onclick = foundEvidence_4;
+}
+
+function foundEvidence_4(){
+	alert("Detective " + user + " found a bloody knife");
+	ev_4 = true;
 }
 
 function searchClue_opt_3(){
-	alert("you are starting your search in the hall, livingroom and the WC");
+	body.style.backgroundImage = 'url("./images/search_place.jpg")';
+	body.style.backgroundSize = "100%";
+	body.style.backgroundPosition = "center";
 	option_1.innerHTML = "Go back to the map";
 	option_1.onclick = searchClue;
 	option_2.innerHTML = "Search the hall";
-	option_2.onclick = console.log("you searched the hall");
+	option_2.onclick = searchClue_opt_3_1;
+	option_2.style.display = "inline";
 	option_3.innerHTML = "Search the livingroom";
-	option_3.onclick = console.log("you searched the livingroom");
+	option_3.onclick = searchClue_opt_3_2;
+	option_3.style.display = "inline";
 	option_4.innerHTML = "Search the toilet";
-	option_4.onclick = console.log("you searched the WC");
+	option_4.onclick = searchClue_opt_3_3;
+	option_4.style.display = "inline";
+}
+
+function searchClue_opt_3_1(){
+	body.style.backgroundImage = 'url("./images/front_hallway_cs.jpeg")';
+	option_1.innerHTML = "Go back to the room overview";
+	option_1.onclick = searchClue_opt_3;
+	option_2.style.display = "none";
+	option_3.style.display = "none";
+	option_4.style.display = "none";
+}
+
+function searchClue_opt_3_2(){
+	body.style.backgroundImage = 'url("./images/livingroom_cs.jpg")';
+	option_1.innerHTML = "Go back to the room overview";
+	option_1.onclick = searchClue_opt_3;
+	option_2.style.display = "none";
+	option_3.style.display = "none";
+	option_4.style.display = "none";
+}
+
+function searchClue_opt_3_3(){
+	body.style.backgroundImage = 'url("./images/wc_1_cs.jpg")';
+	option_1.innerHTML = "Go back to the room overview";
+	option_1.onclick = searchClue_opt_3;
+	option_2.style.display = "none";
+	option_3.style.display = "none";
+	option_4.style.display = "none";
 }
 
 function searchClue_opt_4(){
-	alert("you are starting your search in the dining room, kitchen and the master bedroom");
+	body.style.backgroundImage = 'url("./images/search_place.jpg")';
+	body.style.backgroundSize = "100%";
+	body.style.backgroundPosition = "center";
 	option_1.innerHTML = "Go back to the map";
 	option_1.onclick = searchClue;
 	option_2.innerHTML = "Search the dining room";
-	option_2.onclick = console.log("you searched the diningroom");
+	option_2.style.display = "inline";
+	option_2.onclick = searchClue_opt_4_1;
 	option_3.innerHTML = "Search the kitchen";
-	option_3.onclick = console.log("you searched the kitchen");
+	option_3.style.display = "inline";
+	option_3.onclick = searchClue_opt_4_2;
 	option_4.innerHTML = "Search the master bedroom";
-	option_4.onclick = console.log("you searched the master bedroom");
+	option_4.style.display = "inline";
+	option_4.onclick = searchClue_opt_4_3;
+	img_container_1.style.display = "none";
 }
 
+function searchClue_opt_4_1(){
+	body.style.backgroundImage = 'url("./images/diningroom_cs.jpg")';
+	option_1.innerHTML = "Go back to the room overview";
+	option_1.onclick = searchClue_opt_4;
+	option_2.style.display = "none";
+	option_3.style.display = "none";
+	option_4.style.display = "none";
+	ev_image_1.src = "./images/weapon.png";
+	ev_image_1.style.width = "73px"; 
+	ev_image_1.onclick = foundEvidence_3;
+	img_container_1.style.display = "block";
+	img_container_1.style.left = "1293px";
+	img_container_1.style.top = "475px";
+}
+
+function foundEvidence_3(){
+	alert("Detective " + user + " found a gun");
+	ev_3 = true;
+}
+
+function searchClue_opt_4_2(){
+	body.style.backgroundImage = 'url("./images/kitchen_cs.jpg")';
+	body.style.backgroundSize = "100%";
+	option_1.innerHTML = "Go back to the room overview";
+	option_1.onclick = searchClue_opt_4;
+	option_2.style.display = "none";
+	option_3.style.display = "none";
+	option_4.style.display = "none";
+	ev_image_1.src = "./images/hand_print.png";
+	ev_image_1.style.width = "50px"; 
+	ev_image_1.onclick = foundEvidence_5;
+	img_container_1.style.display = "block";
+	img_container_1.style.left = "4px";
+	img_container_1.style.top = "243px";
+}
+
+function foundEvidence_5(){
+	alert("Detective " + user + " found a hand print");
+	ev_5 = true;
+}
+
+function searchClue_opt_4_3(){
+	body.style.backgroundImage = 'url("./images/master_bedroom_cs.jpg")';
+	option_1.innerHTML = "Go back to the room overview";
+	option_1.onclick = searchClue_opt_4;
+	option_2.style.display = "none";
+	option_3.style.display = "none";
+	option_4.style.display = "none";
+}
+
+/*=========Security Cams===========*/
 
 function lookCam(){
-	console.log("you looked at the security cams");
+	console.log("Detective " + user + " looked at the security cams");
 	body.style.backgroundImage = 'url("./images/security_room.jpg")';
 	option_1.innerHTML = "Go back to the crime scene";
 	option_1.onclick = crimeScene;
@@ -213,8 +413,24 @@ function lookCam(){
 	option_4.onclick = lookCam_3;
 }
 
+function lookCam_1(){
+	story.innerHTML = "This camera saw nothing";
+}
+
+function lookCam_2(){
+	story.innerHTML = "This camera captured a car speeding past. The camera was unable to capture the license plate";
+}
+
+function lookCam_3(){
+	console.log("Detective" + user + " captured a license plate");
+	story.innerHTML = "This camera captured a car speeding past. The camera was able to capture the license plate";
+	ev_6 = true;
+}
+
+/*=========After crime scene===========*/
+
 function goToStation(){
-	console.log("on your way to the Police Station.");
+	console.log("you are on your way to the Police Station.");
 	story.innerHTML = "While you are on your way to the station you see a doughnut store.";
 	body.style.backgroundImage = 'url("./images/doughnut_store.jpg")';
 	body.style.backgroundPosition = "center";
@@ -229,8 +445,7 @@ function goToStation(){
 }
 
 function buyDoughnuts(){
-	alert("You bought some donuts");
-	console.log("You bought some donuts");
+	console.log("Detective " + user + " bought some donuts");
 	doughnuts = true;
 	option_1.style.display = "none";
 }
@@ -242,17 +457,37 @@ function atStation(){
 	else{
 		alert("You didn't buy any doughnuts the other people dont like you now");
 	}
-
-	if(witness_1_ev_1){
-		console.log("You got info from first witness");
-	}
-
-	if(witness_3_ev_1){
-		console.log("You got info from third Witness");
-	}
 	body.style.backgroundImage = 'url("./images/police_screen.jpg")';
 	body.style.backgroundSize = "108%"
 	document.getElementById("task_bar").style.display = "inline";
 	document.getElementById("police_badge").style.display = "block";
 	document.getElementById("password_post_it").style.display = "block";
+	file_container_1.style.display = "inline";
+	file_container_1.onclick = suspectSelect;
+}
+
+function suspectSelect(){
+
+	/*======Suspect 1=======*/
+	
+	if(ev_1 && ev_3){
+		story.innerHTML = "You found the killer";
+	}
+	else{
+		img_container_1.style.display = "inline";
+		image_container_1.style.left = "50px";
+		ev_image_1.src = "./images/unknown_suspect.jpg";
+	}
+
+	/*======Suspect 2=======*/
+
+	img_container_2.style.display = "inline";
+	img_container_2.style.left = "125px";
+	ev_image_2.src = "./images/unknown_suspect.jpg";
+
+	/*======Suspect 3=======*/
+
+	img_container_3.style.display = "inline";
+	img_container_3.style.left = "200px";
+	ev_image_3.src = "./images/unknown_suspect.jpg";
 }
