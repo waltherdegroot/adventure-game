@@ -79,7 +79,7 @@ main{
 #task_bar{
 	position:absolute;
 	left: -385px;
-    bottom: -148px;
+    bottom: -169px;
 	display: none;
 }
 
@@ -143,18 +143,55 @@ main{
 	width: 50px;
 }
 
+#image_1_text{
+	text-align: center;
+	font-size: 18px;
+}
+
+#image_2_text{
+	text-align: center;
+	font-size: 18px;
+}
+
+#image_3_text{
+	text-align: center;
+	font-size: 18px;
+}
+
 #option_1{
 	display: none;
+	background-color: rgba(94, 98, 104, 0.5);
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
 }
 
 #option_2{
 	display: none;
+    background-color: rgba(94, 98, 104, 0.5);
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
 }
 
 #option_3{
 	display: none;
+	background-color: rgba(94, 98, 104, 0.5);
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
 }
 
 #option_4{
 	display: none;
+	background-color: rgba(94, 98, 104, 0.5);
+    border-radius: 15px;
+    color: white;
+    font-size: 20px;
+}
+
+#button_container{
+	position: absolute;
+	left: 50px;
+	bottom: 50px;
 }
