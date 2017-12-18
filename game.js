@@ -18,6 +18,7 @@ var img_container_3 = document.getElementById("image_container_3");
 var file_container_1 = document.getElementById("suspect_file_container");
 var user = "";
 var doughnuts = false;
+var doughnuts_quality = 0;
 
 /*==========Evidence==========*/
 var ev_1 = false;
@@ -57,7 +58,8 @@ function setUsername(){
 		option_1.innerHTML = "Go to Crime scene";
 		option_1.onclick = crimeScene;
 		body.style.backgroundImage = 'url("./images/police_screen.jpg")';
-		body.style.backgroundSize = "108%"
+		body.style.backgroundSize = "108%";
+		head_1.innerHTML = "Police station";
 		document.getElementById("usernameTextBox").style.display = "none";
 		document.getElementById("passwordTextBox").style.display = "none";
 		document.getElementById("task_bar").style.display = "inline";
@@ -83,8 +85,8 @@ function crimeScene(){
 	file_container_1.style.display = "none";
 	head_1.innerHTML = "Crime Scene"
 	story.innerHTML = "You arrived at the crime scene. It is a murder crime scene. A high ranking officer was killed.";
-	option_1.innerHTML = "Talk with witnesses"
-	option_1.onclick = talkWitness;
+	option_1.innerHTML = "Go back to the station";
+	option_1.onclick = goToStation;
 	option_2.style.display = "inline";
 	option_2.innerHTML = "Search the crime scene for clue's";
 	option_2.onclick = searchClue;
@@ -92,8 +94,8 @@ function crimeScene(){
 	option_3.innerHTML = "Go look at nearby security cams for clue's";
 	option_3.onclick = lookCam;
 	option_4.style.display = "inline";
-	option_4.innerHTML = "Go back to the station";
-	option_4.onclick = goToStation;
+	option_4.innerHTML = "Talk with witnesses"
+	option_4.onclick = talkWitness;
 }
 
 /*=========witness's===========*/
@@ -472,14 +474,18 @@ function buyDoughnuts(){
 	console.log("Detective " + user + " bought some donuts");
 	doughnuts = true;
 	option_1.style.display = "none";
+	story.innerHTML = "You bought some doughnuts";
+	doughnuts_quality = Math.random();
+	console.log(doughnuts_quality);
 }
 
 function atStation(){
+	option_2.style.display = "none";
 	if(doughnuts){
-		alert("you bought some doughnuts and shared them with other detective's");
+		story.innerHTML = "you bought some doughnuts and shared them with other detective's";
 	}
 	else{
-		alert("You didn't buy any doughnuts the other people dont like you now");
+		story.innerHTML = "You didn't buy any doughnuts the other people dont like you now";
 	}
 	body.style.backgroundImage = 'url("./images/police_screen.jpg")';
 	body.style.backgroundSize = "108%"
@@ -492,14 +498,19 @@ function atStation(){
 
 function suspectSelect(){
 	head_1.innerHTML = "Suspects";
-	//body.style.backgroundImage = 'url("./images/police_screen.jpg")';
-	//body.style.backgroundSize = "108%"
 	document.getElementById("task_bar").style.display = "none";
 	document.getElementById("police_badge").style.display = "none";
 	document.getElementById("password_post_it").style.display = "none";
+	story.style.display	= "none";
 	file_container_1.style.display = "none";
 	body.style.backgroundImage = "none";
 	body.style.background = "grey";
+	ev_image_1.style.width = "300px";
+	ev_image_2.style.width = "300px";
+	ev_image_3.style.width = "300px";
+	img_container_1.style.top = "initial";
+	img_container_2.style.top = "initial";
+	img_container_3.style.top = "initial";
 
 	/*======Suspect 1=======*/
 	
@@ -520,42 +531,46 @@ function suspectSelect(){
 	/*======Suspect 2=======*/
 	if(ev_3 || ev_4){
 		img_container_2.style.display = "inline";
-		img_container_2.style.left = "125px";
+		img_container_2.style.left = "435px";
 		img_container_2.onclick = suspectArrest_2;
 		ev_image_2.src = "./images/emily_suspect_1.jpg";
+		ev_image_2.style.width = "309px";
 		text_2.innerHTML = suspect_name[1];
 	}
 	else{
 		img_container_2.style.display = "inline";
-		img_container_2.style.left = "125px";
+		img_container_2.style.left = "435px";
 		ev_image_2.src = "./images/unknown_suspect.jpg";
 		text_2.innerHTML = "???";
 	}
 
 	/*======Suspect 3=======*/
 	if(ev_5 || witness_3_ev_1 ){
+		ev_image_3.style.width = "300px";
 		img_container_3.style.display = "inline";
-		img_container_3.style.left = "200px";
-		ev_image_3.style.transform = "rotate(90deg)";
+		img_container_3.style.left = "809px";
 		img_container_3.onclick = suspectArrest_3;
 		ev_image_3.src = "./images/irshaad_suspect.jpg";
 		text_3.innerHTML = suspect_name[2];
 	}
 	else{
 		img_container_3.style.display = "inline";
-		img_container_3.style.left = "200px";
+		img_container_3.style.left = "800px";
 		ev_image_3.src = "./images/unknown_suspect.jpg";
 		text_3.innerHTML = "???";
 	}
 }
 
-function suspectArrest_before(){
-
-}
+/*=====Suspects arrests======*/
 
 function suspectArrest_1(){
+	story.style.display	= "inline";
+	img_container_1.style.display = "none";
+	img_container_2.style.display = "none";
+	img_container_3.style.display = "none";
 	if(doughnuts){
-		story.innerHTML = "you arrested " + suspect_name[0] + " he was innocent";
+		story.innerHTML = "you are arresting " + suspect_name[0] + " Choose how you want to arrest the murderer";
+		pickArrest_1();
 	}
 	else{
 		story.innerHTML = "The other cops didnt like you because you had no doughnuts. So now you had to arrest " + suspect_name[0] + " on your own." ;
@@ -563,8 +578,13 @@ function suspectArrest_1(){
 }
 
 function suspectArrest_2(){
+	story.style.display	= "inline";
+	img_container_1.style.display = "none";
+	img_container_2.style.display = "none";
+	img_container_3.style.display = "none";
 	if(doughnuts){
-		story.innerHTML = "you arrested " + suspect_name[1] + " she was guilty";
+		story.innerHTML = "you are arresting " + suspect_name[1] + " Choose how you want to arrest the murderer";
+		pickArrest_2();
 	}
 	else{
 		story.innerHTML = "The other cops didnt like you because you had no doughnuts. So now you had to arrest " + suspect_name[1] + " on your own.";
@@ -572,10 +592,232 @@ function suspectArrest_2(){
 }
 
 function suspectArrest_3(){
+	story.style.display	= "inline";
+	img_container_1.style.display = "none";
+	img_container_2.style.display = "none";
+	img_container_3.style.display = "none";
 	if(doughnuts){
-		story.innerHTML = "you arrested " + suspect_name[2] + " he was innocent";
+		story.innerHTML = "you are arresting " + suspect_name[2] + " Choose how you want to arrest the murderer";
+		pickArrest_3();
 	}
 	else{
 		story.innerHTML = "The other cops didnt like you because you had no doughnuts. So now you had to arrest " + suspect_name[2] + " on your own.";
 	}
+}
+
+/*=====Suspect 1 arrest begin ======*/
+
+function pickArrest_1(){
+	option_1.innerHTML = "Knock on the front door and arrest the murderer.";
+	option_1.style.display = "inline";
+	option_1.onclick = youArrest_1;
+	if(doughnuts && doughnuts_quality >= 0.6){
+		option_2.innerHTML = "Get S.W.A.T. to attack and arrest the murderer";
+		option_2.style.display = "inline";
+		option_2.style.display = "inline";
+		option_2.onclick = swatArrest_1;
+	}
+}
+
+function youArrest_1(){
+	story.innerHTML = "You Knock on the front door";
+	option_1.innerHTML = "Yell this is the police";
+	option_1.onclick = youArrest_1_1;
+	option_2.innerHTML = "Wait for the suspect to open the door";
+	option_2.style.display = "inline";
+	option_2.onclick =  youArrest_1_2;
+}
+
+function youArrest_1_1(){
+	story.innerHTML = "You hear a door opening and see somebody running away.";
+	option_1.innerHTML = "Yell FREEZE and run after " + suspect_name[0];
+	option_1.onclick = youArrest_1_1_1;
+	option_2.innerHTML = "Call for a chase";
+	option_2.onclick = youArrest_1_1_2;
+}
+
+function youArrest_1_1_1(){
+	story.innerHTML = "The suspect gives up and gets arrested. YOU WIN";
+	victoryScreen();
+}
+
+function youArrest_1_1_2(){
+	story.innerHTML = "You ordered a pursuit on " + suspect_name[0] + " but because you didnt buy doughnuts it gets denied. GAME OVER";
+	gameOver();
+}
+
+function youArrest_1_2(){
+	story.innerHTML = "The front door opens";
+	option_1.innerHTML = "You are under arrest for suspected murder";
+	option_1.onclick = youArrest_1_2_1;
+	option_2.innerHTML = "Point a gun at the suspect";
+	option_2.onclick = youArrest_1_2_2;
+}
+
+function youArrest_1_2_1(){
+	story.innerHTML = suspect_name[0] + " gets arrested with out any trouble. YOU WIN";
+	victoryScreen();
+}
+
+function youArrest_1_2_2(){
+	story.innerHTML = suspect_name[0] + " pulls out a gun.";
+	option_1.innerHTML = "Put the gun down";
+	option_1.onclick = youArrest_1_2_2_1;
+	option_2.style.display = "none";
+}
+
+function youArrest_1_2_2_1(){
+	story.innerHTML = suspect_name[0] + " shot you. GAME OVER";
+	gameOver();
+}
+
+
+function swatArrest_1(){
+	story.innerHTML = "You called in a S.W.A.T. team to arrest the suspect.";
+	option_1.innerHTML = "Tell S.W.A.T. to proceed."
+	option_1.onclick = swatArrest_1_1;
+}
+
+function swatArrest_1_1(){
+	story.innerHTML = "S.W.A.T. arrested " + suspect_name[0] + " without  any trouble. but he wasn't the murderer so you got demoted. GAME OVER";
+	gameOver();
+}
+
+/*=====Suspect 2 arrest begin ======*/
+
+function pickArrest_2(){
+	option_1.innerHTML = "Knock on the front door and arrest the murderer.";
+	option_1.onclick = youArrest_2;
+	option_1.style.display = "inline";
+	if(doughnuts && doughnuts_quality >=0.6){
+		option_2.innerHTML = "Get S.W.A.T. to attack and arrest the murderer";
+		option_2.onclick = swatArrest_2;
+		option_2.style.display = "inline";
+	}
+}
+
+function youArrest_2(){
+	story.innerHTML = "You Knock on the front door";
+	option_1.innerHTML = "Yell this is the police";
+	option_1.onclick = youArrest_2_1;
+	option_2.style.display = "inline";
+	option_2.innerHTML = "Wait for the suspect to open the door";
+	option_2.onclick = youArrest_2_2;
+}
+
+function youArrest_2_1(){
+	story.innerHTML = suspect_name[1] + " mother opens the door";
+	option_1.innerHTML = "Is " + suspect_name[1] + " home?";
+	option_1.onclick = youArrest_2_1_1;
+	option_2.innerHTML = "Just walk inside";
+	option_2.onclick = youArrest_2_1_2;
+}
+
+function youArrest_2_1_1(){
+	story.innerHTML = "Yeah she is home. (Yells:) EMILY police is here for you. you hear her running away";
+	option_1.innerHTML = "Run after her";
+	option_1.onclick = youArrest_2_1_1_1;
+}
+
+function youArrest_2_1_2(){
+	story.innerHTML = "You find " + suspect_name[1] + " playing games and arrest the suspect. YOU WIN";
+	victoryScreen();
+}
+
+function youArrest_2_1_1_1(){
+	story.innerHTML = "She was prepared for this moment and got away in a get away vehicle. GAME OVER";
+	gameOver();
+}
+
+function youArrest_2_2(){
+	story.innerHTML = suspect_name[1] + " opens the door";
+	option_1.innerHTML = "You are under arrest for suspected murder.";
+	option_1.onclick = youArrest_2_2_1;
+	option_2.innerHTML = "Point a gun at " + suspect_name[1];
+	option_2.onclick = youArrest_2_2_2;
+}
+
+function youArrest_2_2_1(){
+	story.innerHTML = "She runs to the back of the house and gets in a car and speeds off. GAME OVER";
+	gameOver();
+}
+
+function youArrest_2_2_2(){
+	story.innerHTML = "She is scared because of the gun and you can arrest her with out a problem. YOU WIN";
+	victoryScreen();
+}
+
+function swatArrest_2(){
+	story.innerHTML = "You called in a S.W.A.T. team to arrest the suspect.";
+	option_1.innerHTML = "Tell S.W.A.T. to proceed."
+	option_1.onclick = swatArrest_2_1;
+}
+
+function swatArrest_2_1(){
+	story.innerHTML = suspect_name[1] + " shot at the S.W.A.T. and got killed. YOU WIN";
+	victoryScreen();
+}
+
+/*=====Suspect 3 arrest begin ======*/
+
+function pickArrest_3(){
+	option_1.innerHTML = "Knock on the front door and arrest the murderer.";
+	option_1.onclick = youArrest_3;
+	option_1.style.display = "inline";
+	if(doughnuts && doughnuts_quality >= 0.6){
+		option_2.innerHTML = "Get S.W.A.T. to attack and arrest the murderer";
+		option_2.style.display = "inline";
+		option_2.onclick = swatArrest_3;
+	}
+}
+
+function youArrest_3(){
+	story.innerHTML = "You Knock on the front door";
+	option_1.innerHTML = "Yell this is the police";
+	option_1.onclick = youArrest_3_1;
+	option_2.innerHTML = "Wait for the suspect to open the door";
+	option_2.onclick = youArrest_3_1;
+	option_2.style.display = "inline";
+}
+
+function youArrest_3_1(){
+	story.innerHTML = suspect_name[2] + " opens the door. And asks how he can help you.";
+	option_1.innerHTML = "You are under arrest for suspected murder";
+	option_1.onclick = youArrest_3_1_1;
+	option_2.innerHTML = "Point a gun at " + suspect_name[2];
+	option_2.onclick = youArrest_3_1_2;
+}
+
+function youArrest_3_1_1(){
+	story.innerHTML = "Well i didn't do anything but sure ill go with you guys. You put handcuffs on " + suspect_name[2] + " and put him in the squad car. But he wasn't the murderer you got demoted. GAME OVER";
+	gameOver();
+}
+
+function youArrest_3_1_2(){
+	story.innerHTML = "Well no need for the gun i didn't do anything but sure ill go with you guys. You put handcuffs on " + suspect_name[2] + " and put him in the squad car. But he wasn't the murderer you got demoted. GAME OVER";
+	gameOver();
+}
+
+
+function swatArrest_3(){
+	story.innerHTML = "You called in a S.W.A.T. team to arrest the suspect.";
+	option_1.innerHTML = "Tell S.W.A.T. to proceed.";
+	option_1.onclick = swatArrest_3_1
+}
+
+function swatArrest_3_1(){
+	story.innerHTML = "S.W.A.T. arrested " + suspect_name[2] + " without  any trouble. But he was innocent. So you got demoted. GAME OVER";
+	gameOver();
+}
+
+function gameOver(){
+	body.style.backgroundColor = "red";
+	option_1.style.display = "none";
+	option_2.style.display = "none";
+}
+
+function victoryScreen(){
+	body.style.backgroundColor = "green";
+	option_1.style.display = "none";
+	option_2.style.display = "none";
 }
