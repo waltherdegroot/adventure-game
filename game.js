@@ -102,6 +102,7 @@ function crimeScene(){
 
 function talkWitness(){
 	console.log("Detective " + user +  "talked to the witnesses");
+	story.style.display = "none";
 	head_1.innerHTML = "Witnesses";
 	body.style.backgroundImage = 'url("./images/witness_scene.jpg")';
 	story.innerHTML = "You are starting to ask qeustions";
@@ -198,6 +199,7 @@ function talkWitness_3_3(){
 
 function searchClue(){
 	console.log("Detective " + user + " started searching for a clue");
+	story.style.display = "none";
 	head_1.innerHTML = "Searching The Crime Scene";
 	option_1.innerHTML = "Go back to the crime scene";
 	option_1.onclick = crimeScene;
@@ -320,6 +322,7 @@ function searchClue_opt_3(){
 
 function searchClue_opt_3_1(){
 	head_1.innerHTML = "Hall";
+	console.log("Detective " + user + " searched the hall");
 	body.style.backgroundImage = 'url("./images/front_hallway_cs.jpeg")';
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_3;
@@ -330,6 +333,7 @@ function searchClue_opt_3_1(){
 
 function searchClue_opt_3_2(){
 	head_1.innerHTML = "livingroom";
+	console.log("Detective " + user + " searched the livingroom");
 	body.style.backgroundImage = 'url("./images/livingroom_cs.jpg")';
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_3;
@@ -340,6 +344,7 @@ function searchClue_opt_3_2(){
 
 function searchClue_opt_3_3(){
 	head_1.innerHTML = "Toilet";
+	console.log("Detective " + user + " searched the toilet");
 	body.style.backgroundImage = 'url("./images/wc_1_cs.jpg")';
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_3;
@@ -368,6 +373,7 @@ function searchClue_opt_4(){
 
 function searchClue_opt_4_1(){
 	head_1.innerHTML = "Dining room";
+	console.log("Detective " + user + " searched the dining room");
 	body.style.backgroundImage = 'url("./images/diningroom_cs.jpg")';
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_4;
@@ -392,6 +398,7 @@ function foundEvidence_3(){
 
 function searchClue_opt_4_2(){
 	head_1.innerHTML = "kitchen";
+	console.log("Detective " + user + " searched the kitchen");
 	body.style.backgroundImage = 'url("./images/kitchen_cs.jpg")';
 	body.style.backgroundSize = "100%";
 	option_1.innerHTML = "Go back to the room overview";
@@ -414,6 +421,7 @@ function foundEvidence_5(){
 
 function searchClue_opt_4_3(){
 	head_1.innerHTML = "Master Bedroom";
+	console.log("Detective " + user + " searched the master bedroom");
 	body.style.backgroundImage = 'url("./images/master_bedroom_cs.jpg")';
 	option_1.innerHTML = "Go back to the room overview";
 	option_1.onclick = searchClue_opt_4;
@@ -426,6 +434,7 @@ function searchClue_opt_4_3(){
 
 function lookCam(){
 	head_1.innerHTML = "Security Room";
+	story.style.display = "none";
 	console.log("Detective " + user + " looked at the security cams");
 	body.style.backgroundImage = 'url("./images/security_room.jpg")';
 	option_1.innerHTML = "Go back to the crime scene";
@@ -439,14 +448,17 @@ function lookCam(){
 }
 
 function lookCam_1(){
+	story.style.display = "inline";
 	story.innerHTML = "This camera saw nothing";
 }
 
 function lookCam_2(){
+	story.style.display = "inline";
 	story.innerHTML = "This camera captured a car speeding past. The camera was unable to capture the license plate";
 }
 
 function lookCam_3(){
+	story.style.display = "inline";
 	console.log("Detective " + user + " captured a license plate");
 	story.innerHTML = "This camera captured a car speeding past. The camera was able to capture the license plate";
 	ev_6 = true;
@@ -456,6 +468,7 @@ function lookCam_3(){
 
 function goToStation(){
 	head_1.innerHTML = "Police Station";
+	story.style.display = "inline";
 	console.log("you are on your way to the Police Station.");
 	story.innerHTML = "While you are on your way to the station you see a doughnut store.";
 	body.style.backgroundImage = 'url("./images/doughnut_store.jpg")';
@@ -481,6 +494,7 @@ function buyDoughnuts(){
 
 function atStation(){
 	option_2.style.display = "none";
+	console.log("You arrived at station");
 	if(doughnuts){
 		story.innerHTML = "you bought some doughnuts and shared them with other detective's";
 	}
@@ -497,6 +511,7 @@ function atStation(){
 }
 
 function suspectSelect(){
+	console.log("Select your suspects");
 	head_1.innerHTML = "Suspects";
 	document.getElementById("task_bar").style.display = "none";
 	document.getElementById("police_badge").style.display = "none";
@@ -564,6 +579,7 @@ function suspectSelect(){
 /*=====Suspects arrests======*/
 
 function suspectArrest_1(){
+	console.log("You are arresting " + suspect_name[0]);
 	story.style.display	= "inline";
 	img_container_1.style.display = "none";
 	img_container_2.style.display = "none";
@@ -578,6 +594,7 @@ function suspectArrest_1(){
 }
 
 function suspectArrest_2(){
+	console.log("You are arresting " + suspect_name[1]);
 	story.style.display	= "inline";
 	img_container_1.style.display = "none";
 	img_container_2.style.display = "none";
@@ -592,6 +609,7 @@ function suspectArrest_2(){
 }
 
 function suspectArrest_3(){
+	console.log("You are arresting " + suspect_name[2]);
 	story.style.display	= "inline";
 	img_container_1.style.display = "none";
 	img_container_2.style.display = "none";
@@ -620,6 +638,7 @@ function pickArrest_1(){
 }
 
 function youArrest_1(){
+	body.style.backgroundImage = 'url("./images/door_1.jpg")';
 	story.innerHTML = "You Knock on the front door";
 	option_1.innerHTML = "Yell this is the police";
 	option_1.onclick = youArrest_1_1;
@@ -697,6 +716,7 @@ function pickArrest_2(){
 }
 
 function youArrest_2(){
+	body.style.backgroundImage = 'url("./images/door_2.jpg")';
 	story.innerHTML = "You Knock on the front door";
 	option_1.innerHTML = "Yell this is the police";
 	option_1.onclick = youArrest_2_1;
@@ -761,6 +781,7 @@ function swatArrest_2_1(){
 /*=====Suspect 3 arrest begin ======*/
 
 function pickArrest_3(){
+	body.style.backgroundImage = 'url("./images/door_3.jpg")';
 	option_1.innerHTML = "Knock on the front door and arrest the murderer.";
 	option_1.onclick = youArrest_3;
 	option_1.style.display = "inline";
@@ -772,6 +793,7 @@ function pickArrest_3(){
 }
 
 function youArrest_3(){
+	body.style.backgroundImage = 'url("./images/door_3.jpg")';
 	story.innerHTML = "You Knock on the front door";
 	option_1.innerHTML = "Yell this is the police";
 	option_1.onclick = youArrest_3_1;
@@ -811,12 +833,16 @@ function swatArrest_3_1(){
 }
 
 function gameOver(){
+	body.style.backgroundImage = "none";
+	console.log("Game over");
 	body.style.backgroundColor = "red";
 	option_1.style.display = "none";
 	option_2.style.display = "none";
 }
 
 function victoryScreen(){
+	body.style.backgroundImage = "none";
+	console.log("You won");
 	body.style.backgroundColor = "green";
 	option_1.style.display = "none";
 	option_2.style.display = "none";
