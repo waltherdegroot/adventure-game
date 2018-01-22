@@ -39,6 +39,8 @@ var witness_3_ev_1 = false;
 
 var suspect_name = ["Walther","Emily","Irshaad"];
 
+alert("Uitleg: Klik op de knoppen om te lopen. Klik op voorwerpen waar van jij denkt dat het bewijsmateriaal is. probeer alle voorwerpen te verzamelen om mogelijke verdachten te ontdekken.");
+
 start_btn.onclick = setUsername;
 
 function setUsername(){
